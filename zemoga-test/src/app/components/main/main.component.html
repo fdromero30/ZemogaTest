@@ -1,0 +1,19 @@
+<div id='containerTop'>
+    <header>
+        <div class="navtitle">
+            Rule of Thumb.
+        </div>
+        <div class="menu">
+            <div *ngFor='let menu of menus'>
+                {{menu.label}}
+            </div>
+        </div>
+    </header>
+</div>
+<div id="containerMiddle">
+    <h1>Votes</h1>
+    <div *ngFor='let subject of subjects' class="cardList">
+        <app-subject [sub]='subject' (action)='voteForSubject($event)' class="cardListItem">
+        </app-subject>
+    </div>
+</div>

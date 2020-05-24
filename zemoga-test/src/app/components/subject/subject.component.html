@@ -1,0 +1,18 @@
+<div class="mainContainer">
+
+    <h1>
+        {{sub.name}}
+    </h1>
+    <label>
+        {{sub.sublabel}}
+    </label>
+    <p>
+        {{sub.description}}
+    </p>
+    <div class="flex-container">
+        <button *ngIf="sub.like">like</button>
+        <button *ngIf="sub.dislike">dislike</button>
+        <button *ngIf="sub.voteNow">Vote/</button>
+        <button *ngIf="sub.voteAgain">Vote again</button>
+    </div>
+</div>
