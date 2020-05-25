@@ -1,0 +1,68 @@
+img{
+    width: 100%;
+    height: calc(100% - 15%);
+}
+.mainContainer{
+    position: relative;
+    color: white;
+    padding: 1rem;
+    height: 100%;
+}
+.containerInfo{
+    position: absolute;
+    bottom: 8rem;
+    left: 1.5rem;
+    font-family: sans-serif;
+    width: 85%;
+}
+
+button{
+    border: none;
+    color: white;
+    height: 3rem;
+    margin: 1%;
+  }
+  .mainLike{
+    background: #009688cc;
+    width: 3rem;
+  }
+  .mainDislike{
+    background: orange;
+    width: 3rem;
+  }
+  .voteNow{
+      background: #0000007d;
+      border: white 1px solid;
+      font-size: 12px;
+      width: 5rem;
+  }
+
+  .progress{
+      height: 2rem;  
+      margin-top: -2rem;    
+      .bg-info {
+        background-color: #17a2b8a8 !important;
+        svg{
+          left: 1.2rem;
+          position: absolute;
+        }
+      }
+      .bg-warning {
+        background-color: #ffc10794 !important;
+        svg{
+          right: 1.2rem;
+          position: absolute;
+        }
+    }
+    .progress-bar{
+        border-radius: 0;
+    }
+  }
+
+  .focusedButton{
+    border: white 2px solid;
+  }
+
+  .disabledButton{
+    background-color: #9e9e9ec7;
+  }

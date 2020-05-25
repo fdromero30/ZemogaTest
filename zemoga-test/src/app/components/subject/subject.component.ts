@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -10,16 +12,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SubjectComponent implements OnInit {
 
     @Input() sub: any
+    @Output() out = new EventEmitter();
 
     menus: any;
+    valueLikes: any;
+    valueDislikes: any;
+    typeSelected: any;
 
-    numeroSuerte: number;
-
-    constructor() {
-
+    constructor(private storeService: StoreService) {
+        this.valueLikes = 0;
+        this.valueDislikes = 0;
     }
     ngOnInit() {
-        this.numeroSuerte = 0;
     }
 
     /**
@@ -27,13 +31,27 @@ export class SubjectComponent implements OnInit {
      * @param subject 
      */
     voteForSubject(subject: any) {
-        const subj = JSON.parse(localStorage.getItem('subject' + subject.id));
-        if (subject.votedLike) {
-            subj.likes = subj.likes + 1;
-        } else if (subject.votedDislike) {
-            subj.dislikes = subj.dislikes + 1;
-        }
-        localStorage.setItem('subject' + subject.id, JSON.stringify(subj));
+
+        this.out.emit(JSON.stringify({ subject: subject, type: this.typeSelected }));
+        this.sub.voteAgain = true;
+        this.typeSelected = null;
+    }
+    /**
+     * 
+     */
+    setLike() {
+        this.typeSelected = 'like';
+    }
+
+    /**
+     * 
+     */
+    setDislike() {
+        this.typeSelected = 'dislike';
+    }
+
+    voteAgain() {
+        this.sub.voteAgain = false;
     }
 }
 

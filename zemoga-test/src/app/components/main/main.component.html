@@ -1,19 +1,76 @@
-<div id='containerTop'>
-    <header>
-        <div class="navtitle">
-            Rule of Thumb.
-        </div>
-        <div class="menu">
-            <div *ngFor='let menu of menus'>
-                {{menu.label}}
+<section class="mainContainer">
+    <!-- <img src="assets/papa.jpg"> -->
+    <header class="container-fluid">
+        <div class="containerTitle row">
+            <div class="navtitle col-lg-3">
+                Rule of Thumb.
+            </div>
+            <div class="menu col-lg-9 ">
+                <div *ngFor='let menu of menus' class="float-lg-right float-sm-left">
+                    <a (click)='goToBlank()'>
+                        {{menu.label}}
+                    </a>
+                </div>
             </div>
         </div>
     </header>
-</div>
-<div id="containerMiddle">
-    <h1>Votes</h1>
-    <div *ngFor='let subject of subjects' class="cardList">
-        <app-subject [sub]='subject' (action)='voteForSubject($event)' class="cardListItem">
-        </app-subject>
+    <section id='containerTop'>
+
+        <div class="mainBanner col-lg-5 col-md-6 col-sm-11 col-xs-11 justify-content-center">
+            <div>
+                <div class="contentBanner">
+                    <label>What's your opinion on</label>
+                    <h1>
+                        Pope Francis?
+                    </h1>
+                    <p>
+                        He's talking tough on clergy sexual abuse, but is he just another papal pervert protector?
+                        (thumbs
+                        down)
+                        or
+                        a true pedophile punishing pontiff? (thumbs uf)
+                    </p>
+                    <p>
+                        W <a>More information</a>
+                    </p>
+
+                    <label class="question">What's Your Verdict?</label>
+                </div>
+                <div class="mainButtons">
+                    <button class="mainLike"><i class="fa fa-thumbs-up"></i></button>
+                    <button class="mainDislike"><i class="fa fa-thumbs-down"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+<section id="containerMiddle">
+    <div class="alert alert-secondary" role="alert" *ngIf="showAlert">
+        <span class="float-right" (click)='closeAlert()'>x</span>
+        <div class="row">
+            <div class="col-lg-3">
+                Speak out. Be heard.
+                <strong>Be counted</strong>
+
+            </div>
+            <div class="col-lg-9">
+                Rule of Thumb is a crowd sourced cout of public opinion where anyone and everyone can speak out and
+                speak freely. It's easy: you share your opinion, we analyze and put the data in a public report.
+            </div>
+
+        </div>
     </div>
-</div>
+    <h1>Votes</h1>
+    <div class="cardList" fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayout.lt-sm="column">
+        <ng-container *ngFor='let subject of subjects'>
+            <app-subject [sub]='subject' (out)='voteForSubject($event)' class="cardListItem"
+                fxFlex="calc(50% - 32px)" fxFlex.lt-md="100%" fxFlex.lt-sm="100%">
+            </app-subject>
+        </ng-container>
+
+    </div>
+</section>
