@@ -1,7 +1,5 @@
 # ZemogaTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
-
 El desarrollo de esta aplicación fue hecho con Angular 9, y las pruebasu nitarias con Jasmine, se utilizó el localstorage para almacenar
 la información correspondiente a los votos para cada persona, incluye un service en donde se consume la información de los personjes a mostrar con HTTP CLIENT de un mock ubicado en Assets.
 
