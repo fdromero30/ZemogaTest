@@ -44,12 +44,16 @@ export class MainComponent implements OnInit {
   /**
    * obtains dthe subjects list
    */
-  getSubjects() {
+  async getSubjects() {
 
-    this.storeService.getListSubjects().subscribe((res: any) => {
+    await this.storeService.getListSubjects().subscribe(async (res: any) => {
       const r = res;
       if (r) {
         this.subjects = r.subjects;
+        await this.subjects.forEach(element => {
+          const subj = JSON.parse(localStorage.getItem('subject' + element.id));
+          if (!subj) { localStorage.setItem('subject' + element.id, JSON.stringify(element)); }
+        });
         this.calculateVotes();
       }
     });
@@ -104,11 +108,34 @@ export class MainComponent implements OnInit {
         element.dislikes = subj.dislikes;
 
         const total = parseInt(element.likes) + parseInt(element.dislikes);
-        element.percentLike = ((parseInt(element.likes) * 100 / total)).toString() + '%';
-        element.percentDislike = (parseInt(element.dislikes) * 100 / total).toString() + '%';
-        element.percentLikeView = ((parseInt(element.likes) * 100 / total));
-        element.percentDislikeView = (parseInt(element.dislikes) * 100 / total);
+        // element.percentLike = element.likes != 0 ? ((parseInt(element.likes) * 100 / total)).toString() + '%' : 
+        if (element.likes != 0) {
+          element.percentLike = ((parseInt(element.likes) * 100 / total)).toString() + '%'
+        } else {
+          if (element.percentDislikeView == 0 || element.percentDislikeView == 100) {
+            element.percentLike = '0%'
+          }
+          else {
+            element.percentLike = '50%'
+          };
+        }
 
+        if (element.dislikes != 0) {
+          element.percentDislike = (parseInt(element.dislikes) * 100 / total).toString() + '%';
+        } else {
+          if (element.percentLikeView == 100 || element.percentLikeView == 0) {
+            element.percentDislike = '0%'
+          } else {
+            element.percentDislike = '50%';
+          }
+        }
+        element.percentLikeView = element.likes != 0 ? ((parseInt(element.likes) * 100 / total)) : 0;
+        element.percentDislikeView = element.dislikes != 0 ? (parseInt(element.dislikes) * 100 / total) : 0;
+      } else {
+        element.percentLike = '50%';
+        element.percentDislike = '50%';
+        element.percentLikeView = 0;
+        element.percentDislikeView = 0;
       }
     });
   }
